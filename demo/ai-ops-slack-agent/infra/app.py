@@ -13,6 +13,7 @@ import aws_cdk as cdk
 from cdk_nag import AwsSolutionsChecks
 
 from aiops_infra.stack import AiopsAgentStack
+from aiops_infra.web_stack import AiopsWebStack
 
 IAM5_FINDINGS = [
     "AwsSolutions-IAM5[Resource::*]",
@@ -61,6 +62,40 @@ ACKS: dict[str, str] = {
     "AwsSolutions::AwsSolutions-L1": "Python 3.12 pinned to the version the unit tests run on.",
 }
 
+# AiopsWebStack (Streamlit console: CloudFront VPC origin -> internal ALB -> EC2, no login). Accepted findings.
+WEB_ACKS: dict[str, str] = {
+    "AwsSolutions::AwsSolutions-IAM4": "AmazonSSMManagedInstanceCore: Session Manager access instead of SSH.",
+    "AwsSolutions::AwsSolutions-IAM5": (
+        "Wildcards are limited to the stack id suffix of AiopsAgentStack (DescribeStacks), endpoints of this one "
+        "Runtime, and executions of this one state machine (ids per run). No Resource '*' permission."),
+    "AwsSolutions::AwsSolutions-ELB2": "Workshop demo: ALB access logs need an extra bucket; CloudFront is the only entry.",
+    "AwsSolutions::AwsSolutions-EC28": "Single demo instance; detailed monitoring adds cost only.",
+    "AwsSolutions::AwsSolutions-EC29": "Demo console must be destroyable with cdk destroy; termination protection off.",
+    "AwsSolutions::AwsSolutions-CFR1": "Workshop participants may connect from any country.",
+    "AwsSolutions::AwsSolutions-CFR2": "WAF adds fixed monthly cost for a short-lived workshop demo; the ALB is internal (VPC origin).",
+    "AwsSolutions::AwsSolutions-CFR3": "Workshop demo: CloudFront access logs need an extra bucket.",
+    "AwsSolutions::AwsSolutions-CFR4": "Default *.cloudfront.net certificate (no custom domain) does not allow a TLS policy choice.",
+    "AwsSolutions::AwsSolutions-CFR5": "Origin is an internal ALB reached through the CloudFront VPC origin (private), HTTP only.",
+}
+WEB_GRANULAR = [
+    "AwsSolutions-IAM4[Policy::arn:<AWS::Partition>:iam::aws:policy/AmazonSSMManagedInstanceCore]",
+    "AwsSolutions-IAM5[Resource::arn:aws:cloudformation:{region}:{account}:stack/AiopsAgentStack/*]",
+    "AwsSolutions-IAM5[Resource::{RuntimeArn}/runtime-endpoint/*]",
+    "AwsSolutions-IAM5[Resource::arn:aws:states:{region}:{account}:execution:{sm_name}:*]",
+]
+
+
+def agent_stack_outputs(name: str, region: str) -> dict[str, str] | None:
+    """Read AiopsAgentStack outputs at synth time; the web stack only needs its ARNs (no cross-stack exports)."""
+    try:
+        import boto3
+        stack = boto3.client("cloudformation", region_name=region).describe_stacks(StackName=name)["Stacks"][0]
+    except Exception as exc:  # noqa: BLE001 - not deployed yet, no credentials, or boto3 missing
+        print(f"[aiops] {name} outputs unavailable ({type(exc).__name__}); AiopsWebStack is skipped.")
+        return None
+    return {o["OutputKey"]: o["OutputValue"] for o in stack.get("Outputs", [])}
+
+
 app = cdk.App()
 region = app.node.try_get_context("aiops:region") or "us-east-1"
 account = os.environ.get("CDK_DEFAULT_ACCOUNT")
@@ -77,4 +112,19 @@ if app.node.try_get_context("aiops:nag") != "false":
     for finding in IAM5_FINDINGS:  # granular IAM5 findings must be acknowledged one by one
         cdk.Validations.of(stack).acknowledge(cdk.Acknowledgment(
             id="AwsSolutions::" + finding.replace("{account}", account), reason=ACKS["AwsSolutions::AwsSolutions-IAM5"]))
+
+if app.node.try_get_context("aiops:web") != "false":
+    outputs = agent_stack_outputs("AiopsAgentStack", region)
+    if outputs:
+        web = AiopsWebStack(app, "AiopsWebStack", agent=outputs, env=cdk.Environment(account=account, region=region),
+                            description="Workshop module 3: Streamlit operator console (CloudFront VPC origin -> "
+                                        "internal ALB -> EC2), no login")
+        if app.node.try_get_context("aiops:nag") != "false":
+            for rule, reason in WEB_ACKS.items():
+                cdk.Validations.of(web).acknowledge(cdk.Acknowledgment(id=rule, reason=reason))
+            values = dict(outputs, account=account, region=region, sm_name=outputs["StateMachineArn"].rsplit(":", 1)[1])
+            for finding in WEB_GRANULAR:  # granular findings are acknowledged one by one
+                rule = finding.split("[", 1)[0]
+                cdk.Validations.of(web).acknowledge(cdk.Acknowledgment(
+                    id="AwsSolutions::" + finding.format(**values), reason=WEB_ACKS["AwsSolutions::" + rule]))
 app.synth()

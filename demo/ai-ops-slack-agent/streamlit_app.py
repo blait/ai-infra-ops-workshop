@@ -76,7 +76,7 @@ with st.sidebar:
         deployment.clear()
         st.rerun()
     st.divider()
-    st.caption("로컬 운영자 콘솔\n\nAWS 자격 증명은 서버에서만 사용합니다.\n모델은 변경을 직접 실행할 수 없습니다.")
+    st.caption("운영자 웹 콘솔\n\nAWS 자격 증명은 서버에서만 사용합니다.\n모델은 변경을 직접 실행할 수 없습니다.")
 
 conversation = st.session_state.sessions[sid]
 messages = conversation["messages"]
@@ -288,7 +288,7 @@ def approvals():
 
 with action_tab:
     st.subheader("제안은 에이전트가, 결정은 운영자가")
-    st.caption("이 로컬 콘솔은 서버의 AWS IAM 자격으로 승인합니다. Slack 사용자 ID를 대신 입력하지 않습니다.")
+    st.caption("이 콘솔은 서버의 AWS IAM 자격으로 승인합니다. Slack 사용자 ID를 대신 입력하지 않습니다.")
     approvals()
 
 st.divider()

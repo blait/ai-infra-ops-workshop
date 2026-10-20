@@ -51,7 +51,7 @@
 ### 2.0 Streamlit + AWS MCP (현재 주 데모)
 
 ```text
-Streamlit (127.0.0.1:8501)
+Streamlit 웹 콘솔 (CloudFront → 내부 ALB → EC2, AiopsWebStack)
  ├ 대화 → AgentCore Runtime (Claude Agent SDK / Bedrock)
  │           ├ Gateway + Policy → 준비된 장애 도구 / 변경 제안 / AWS 문서
  │           ├ Gateway awstoolkit → 전용 조회 Lambda → AWS MCP Server → 실제 AWS API
@@ -64,7 +64,7 @@ Streamlit (127.0.0.1:8501)
 - **실제 AWS 계정**: Toolkit의 `aws___run_script`를 `aws_mcp_read`로 감싸 제공합니다. Python은 AWS MCP sandbox에서 실행하며 `api_calls`와 오류를 근거에 남깁니다. EC2·CloudWatch·Logs·CloudTrail·Cost Explorer·CloudFormation의 지정 조회 API만 IAM으로 허용합니다. 다른 MCP 작업은 명시적 Deny입니다.
 - **역할 분리**: Runtime의 기존 권한은 그대로입니다. MCP 전용 Lambda가 SigV4 서명하고 자기 조회 역할로 호출합니다. 도구의 Cedar permit은 Runtime 역할에만 적용합니다.
 - **GUI 승인**: AWS STS의 실제 호출자를 사용합니다. 임의 Slack ID를 입력하지 않습니다. 현재 GUI 세션·채널·만료·중복 결정을 검사하며 승인 콜백 token은 브라우저로 보내지 않습니다. 재전달 실패는 화면에 표시하고 기존 결정만 재전달합니다.
-- **운영 범위**: 강사 한 명의 로컬 운영자 UI입니다. 공유·공개 배포에는 별도 SSO와 사용자별 승인 권한이 필요합니다. 현재 AWS 자격 증명은 서버에서만 사용합니다.
+- **운영 범위**: 로그인 없는 시연용 웹 콘솔입니다(`AiopsWebStack`, CloudFront 주소). 요청과 승인이 콘솔 EC2의 IAM 역할로 기록됩니다. 팀 서비스로 쓰려면 SSO와 사용자별 승인 권한이 필요합니다. 로컬 실행(`streamlit run streamlit_app.py`)도 가능합니다. 현재 AWS 자격 증명은 서버에서만 사용합니다.
 - **화면 상태**: 브라우저 세션의 대화 목록은 메모리에 있고, 노트·근거와 승인 기록은 AWS에 보관됩니다. 브라우저를 닫아도 시작한 AWS 실행은 취소되지 않습니다.
 
 빠른 실행:
