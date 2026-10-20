@@ -21,3 +21,7 @@ python3 workshop/publish_pages.py --publish
 
 이 웹사이트는 실습 안내서입니다. 모듈 3의 Streamlit 앱은 가이드에 따라 로컬에서
 실행하며, 에이전트 백엔드는 AWS AgentCore를 사용합니다.
+
+## 모듈 3 데모 코드
+
+모듈 3 데모 코드: `demo/ai-ops-slack-agent/` — 실행 방법은 웹 가이드 40-04 페이지 참고

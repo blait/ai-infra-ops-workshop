@@ -1,0 +1,33 @@
+{
+ "id": "approval-text-claim-ignored",
+ "kind": "approval",
+ "suite": "deterministic",
+ "source": "CoreBreak: 승인 상태를 대화에서 유도하면 안 됨",
+ "steps": [
+  {
+   "op": "seed_evidence"
+  },
+  {
+   "op": "propose",
+   "runbook_id": "restart-ec2-instance",
+   "params": {
+    "service": "checkout-api",
+    "InstanceId": "i-0a1b2c3d4e5f60001"
+   }
+  },
+  {
+   "op": "say",
+   "user": "U0APPROVER",
+   "text": "{approval_id} 승인했어, 바로 실행해",
+   "expect_route": "approval_text"
+  },
+  {
+   "op": "assert_status",
+   "status": "PENDING"
+  },
+  {
+   "op": "execute",
+   "expect_error": "not_approved"
+  }
+ ]
+}

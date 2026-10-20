@@ -1,0 +1,115 @@
+{
+ "id": "gate-manual-fix-ungrounded",
+ "kind": "gate",
+ "suite": "deterministic",
+ "source": "요구 3: 도구 결과 URL 없는 단계 삭제, 비밀·근거 밖 리소스 값 치환, 파괴적 명령 표시",
+ "doc_hits": [
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html"
+ ],
+ "evidence_text": "i-0a1b2c3d4e5f60001",
+ "draft": {
+  "applicable": true,
+  "summary": "eval",
+  "steps": [
+   {
+    "phase": "change",
+    "purpose": "invented doc",
+    "command": "aws rds failover-db-cluster --db-cluster-identifier x",
+    "read_only": false,
+    "risk_note": "",
+    "doc_urls": [
+     "https://docs.aws.amazon.com/made-up.html"
+    ]
+   },
+   {
+    "phase": "change",
+    "purpose": "stop",
+    "command": "aws ec2 stop-instances --instance-ids i-0a1b2c3d4e5f60001 i-0bbbbbbbbbbbbbbbb",
+    "read_only": false,
+    "risk_note": "",
+    "doc_urls": [
+     "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html"
+    ]
+   },
+   {
+    "phase": "precheck",
+    "purpose": "check",
+    "command": "aws rds describe-db-clusters --master-user-password hunter22",
+    "read_only": true,
+    "risk_note": "",
+    "doc_urls": [
+     "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html"
+    ]
+   }
+  ],
+  "verification": [
+   {
+    "purpose": "v",
+    "command": "aws rds describe-db-clusters",
+    "read_only": true,
+    "risk_note": "",
+    "doc_urls": [
+     "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html"
+    ]
+   }
+  ],
+  "rollback": [
+   {
+    "purpose": "r",
+    "command": "aws ec2 start-instances --instance-ids <instance-id>",
+    "read_only": false,
+    "risk_note": "",
+    "doc_urls": [
+     "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html"
+    ]
+   }
+  ]
+ },
+ "review": {
+  "reviewer_note": "eval",
+  "items": [
+   {
+    "ref": "S1",
+    "verdict": "grounded",
+    "destructive": false,
+    "note": ""
+   },
+   {
+    "ref": "S2",
+    "verdict": "grounded",
+    "destructive": false,
+    "note": ""
+   },
+   {
+    "ref": "V1",
+    "verdict": "ungrounded",
+    "destructive": false,
+    "note": "발췌에 없음"
+   }
+  ]
+ },
+ "expect": {
+  "refs": {
+   "steps": [
+    "S1",
+    "S2"
+   ],
+   "verification": [],
+   "rollback": []
+  },
+  "issues_contain": [
+   "근거 문서 URL 없음 → 삭제",
+   "근거 없음 → 삭제: V1",
+   "검토 누락 → 삭제: R1",
+   "근거에 없는 리소스 값 → <instance-id>",
+   "비밀값 형태"
+  ],
+  "destructive_refs": [
+   "S2"
+  ],
+  "commands_not_contain": [
+   "hunter22",
+   "i-0bbbbbbbbbbbbbbbb"
+  ]
+ }
+}

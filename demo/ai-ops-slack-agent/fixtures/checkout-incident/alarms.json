@@ -1,0 +1,72 @@
+[
+ {
+  "AlarmName": "checkout-api-5xx-rate-high",
+  "StateValue": "ALARM",
+  "StateUpdatedTimestamp": "2026-10-15T04:50:00Z",
+  "MetricKey": "5xx_rate",
+  "Threshold": 2.0,
+  "Unit": "%",
+  "StateReason": "Threshold Crossed: 1 datapoint [8.9] was greater than the threshold (2.0).",
+  "Service": "checkout-api"
+ },
+ {
+  "AlarmName": "checkout-api-p99-latency-high",
+  "StateValue": "ALARM",
+  "StateUpdatedTimestamp": "2026-10-15T04:48:00Z",
+  "MetricKey": "latency_p99",
+  "Threshold": 1500,
+  "Unit": "ms",
+  "StateReason": "Threshold Crossed: 2 datapoints [2860.0, 1240.0] were greater than the threshold (1500.0).",
+  "Service": "checkout-api"
+ },
+ {
+  "AlarmName": "checkout-api-unhealthy-hosts",
+  "StateValue": "OK",
+  "StateUpdatedTimestamp": "2026-10-11T02:00:00Z",
+  "MetricKey": "healthy_hosts",
+  "Threshold": 3,
+  "Unit": "count",
+  "StateReason": "Threshold Crossed: no datapoints were less than the threshold (3.0).",
+  "Service": "checkout-api"
+ },
+ {
+  "AlarmName": "payments-db-connections-high",
+  "StateValue": "OK",
+  "StateUpdatedTimestamp": "2026-10-09T07:00:00Z",
+  "MetricKey": "db_connections",
+  "Threshold": 400,
+  "Unit": "count",
+  "StateReason": "Threshold Crossed: 1 datapoint [63.0] was not greater than the threshold (400.0).",
+  "Service": "payments-db"
+ },
+ {
+  "AlarmName": "payments-db-cpu-high",
+  "StateValue": "OK",
+  "StateUpdatedTimestamp": "2026-10-09T07:00:00Z",
+  "MetricKey": "cpu",
+  "Threshold": 80,
+  "Unit": "%",
+  "StateReason": "Threshold Crossed: 1 datapoint [31.0] was not greater than the threshold (80.0).",
+  "Service": "payments-db"
+ },
+ {
+  "AlarmName": "analytics-nat-bytes-anomaly",
+  "StateValue": "ALARM",
+  "StateUpdatedTimestamp": "2026-10-14T01:05:00Z",
+  "MetricKey": "nat_bytes_out",
+  "Threshold": 0,
+  "Unit": "bytes",
+  "StateReason": "Thresholds Crossed: 1 datapoint was outside the anomaly band (ANOMALY_DETECTION_BAND).",
+  "Service": "analytics-export"
+ },
+ {
+  "AlarmName": "billing-estimated-charges-monthly",
+  "StateValue": "OK",
+  "StateUpdatedTimestamp": "2026-10-01T00:00:00Z",
+  "MetricKey": "estimated_charges",
+  "Threshold": 30000,
+  "Unit": "USD",
+  "StateReason": "Threshold Crossed: 1 datapoint [12480.0] was not greater than the threshold (30000.0).",
+  "Service": "account"
+ }
+]

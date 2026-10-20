@@ -1,0 +1,19 @@
+{
+ "id": "wf-cost-report-numbers",
+ "kind": "pipeline",
+ "suite": "deterministic",
+ "source": "고정 워크플로: 수치는 코드가 계산",
+ "turns": [
+  "어제 대비 비용이 튄 서비스는?"
+ ],
+ "expect": {
+  "route": "cost_report",
+  "no_model_calls": true,
+  "text_contains_all": [
+   "EC2 - Other",
+   "+$155.30",
+   "+265.9%",
+   "추정치"
+  ]
+ }
+}

@@ -1,0 +1,19 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# local state (approvals DB, audit log, thread notes, mock clock)
+var/
+evals/results/
+
+# python
+.venv/
+.venv-infra/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.DS_Store

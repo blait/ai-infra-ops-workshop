@@ -1,0 +1,81 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BedrockInvokeForClaudeCode",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream",
+        "bedrock:ListInferenceProfiles",
+        "bedrock:GetInferenceProfile"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:*:*:inference-profile/*",
+        "arn:aws:bedrock:*:*:application-inference-profile/*",
+        "arn:aws:bedrock:*:*:foundation-model/*"
+      ]
+    },
+    {
+      "Sid": "ToolCloudWatchAlarmsAndMetrics",
+      "Effect": "Allow",
+      "Action": ["cloudwatch:DescribeAlarms", "cloudwatch:GetMetricData"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ToolLogsInsightsOnServiceLogGroups",
+      "Effect": "Allow",
+      "Action": ["logs:StartQuery"],
+      "Resource": "arn:aws:logs:REGION:ACCOUNT_ID:log-group:/prod/*"
+    },
+    {
+      "Sid": "ToolLogsInsightsResults",
+      "Effect": "Allow",
+      "Action": ["logs:GetQueryResults", "logs:StopQuery"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ToolCloudTrailLookup",
+      "Effect": "Allow",
+      "Action": ["cloudtrail:LookupEvents"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ToolCostExplorer",
+      "Effect": "Allow",
+      "Action": ["ce:GetCostAndUsage"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ToolServiceInventory",
+      "Effect": "Allow",
+      "Action": ["ec2:DescribeInstances"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyChangesEvenIfBroaderPolicyIsAttached",
+      "Effect": "Deny",
+      "Action": [
+        "ssm:StartAutomationExecution",
+        "ssm:SendCommand",
+        "ssm:StartSession",
+        "ec2:StopInstances",
+        "ec2:StartInstances",
+        "ec2:RebootInstances",
+        "ec2:TerminateInstances",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:ModifyInstanceAttribute",
+        "iam:*",
+        "codedeploy:CreateDeployment",
+        "codedeploy:StopDeployment",
+        "cloudtrail:StopLogging",
+        "cloudtrail:DeleteTrail",
+        "rds:Delete*",
+        "rds:Modify*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

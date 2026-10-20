@@ -1,0 +1,40 @@
+# Slack 앱 매니페스트 (배포 모드: HTTP Events API + Interactivity → API Gateway)
+# https://api.slack.com/apps → Create New App → From a manifest → 이 파일 붙여넣기
+# <API_ENDPOINT> 는 `python infra/scripts/e2e.py outputs` 의 SlackEventsUrl / SlackInteractivityUrl 앞부분
+# (https://<api-id>.execute-api.us-east-1.amazonaws.com) 으로 바꿉니다.
+# 설치 후 Secrets Manager 비밀(스택 출력 SlackSecretArn)의 두 값을 실제 값으로 바꿉니다.
+#   bot_token      : OAuth & Permissions → Bot User OAuth Token (xoxb-)
+#   signing_secret : Basic Information → App Credentials → Signing Secret
+# Socket Mode용 앱 토큰(xapp-)은 배포 모드에서 쓰지 않습니다(로컬 모드는 slack/manifest.yaml).
+display_information:
+  name: ops-agent
+  description: 사내 운영 에이전트 (읽기 전용 조사 + runbook 제안, 변경은 승인 버튼으로만)
+  background_color: "#232f3e"
+features:
+  app_home:
+    home_tab_enabled: false
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: ops-agent
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read
+      - chat:write
+      - im:history
+      - im:read
+      - im:write
+settings:
+  event_subscriptions:
+    request_url: <API_ENDPOINT>/slack/events          # url_verification(challenge)에 ingress Lambda가 응답
+    bot_events:
+      - app_mention
+      - message.im
+  interactivity:
+    is_enabled: true
+    request_url: <API_ENDPOINT>/slack/interactivity   # 승인/거절 버튼 → interactivity Lambda
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

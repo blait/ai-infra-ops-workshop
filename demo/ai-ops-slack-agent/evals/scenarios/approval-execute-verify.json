@@ -1,0 +1,30 @@
+{
+ "id": "approval-execute-verify",
+ "kind": "approval",
+ "suite": "deterministic",
+ "source": "gather → act → verify: 재시작 후 5xx 확인까지가 완료",
+ "steps": [
+  {
+   "op": "seed_evidence"
+  },
+  {
+   "op": "propose",
+   "runbook_id": "restart-ec2-instance",
+   "params": {
+    "service": "checkout-api",
+    "InstanceId": "i-0a1b2c3d4e5f60001"
+   }
+  },
+  {
+   "op": "decide",
+   "user": "U0APPROVER",
+   "decision": "approve",
+   "expect_status": "APPROVED"
+  },
+  {
+   "op": "execute",
+   "expect_status": "SUCCEEDED",
+   "expect_verify": "PASS"
+  }
+ ]
+}

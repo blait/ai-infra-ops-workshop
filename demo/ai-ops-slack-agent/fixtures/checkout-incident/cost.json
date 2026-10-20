@@ -1,0 +1,434 @@
+[
+ {
+  "date": "2026-10-07",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 407.44,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-07",
+  "service": "EC2 - Other",
+  "amount": 59.27,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-07",
+  "service": "Amazon Relational Database Service",
+  "amount": 187.0,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-07",
+  "service": "Amazon Simple Storage Service",
+  "amount": 36.57,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-07",
+  "service": "AmazonCloudWatch",
+  "amount": 21.95,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-07",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 30.27,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-07",
+  "service": "AWS Lambda",
+  "amount": 6.29,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-07",
+  "service": "Amazon DynamoDB",
+  "amount": 13.92,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-08",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 419.04,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-08",
+  "service": "EC2 - Other",
+  "amount": 57.12,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-08",
+  "service": "Amazon Relational Database Service",
+  "amount": 189.3,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-08",
+  "service": "Amazon Simple Storage Service",
+  "amount": 37.54,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-08",
+  "service": "AmazonCloudWatch",
+  "amount": 22.46,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-08",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 30.7,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-08",
+  "service": "AWS Lambda",
+  "amount": 6.21,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-08",
+  "service": "Amazon DynamoDB",
+  "amount": 14.35,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-09",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 415.33,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-09",
+  "service": "EC2 - Other",
+  "amount": 58.36,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-09",
+  "service": "Amazon Relational Database Service",
+  "amount": 181.14,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-09",
+  "service": "Amazon Simple Storage Service",
+  "amount": 37.39,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-09",
+  "service": "AmazonCloudWatch",
+  "amount": 21.62,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-09",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 30.25,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-09",
+  "service": "AWS Lambda",
+  "amount": 6.15,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-09",
+  "service": "Amazon DynamoDB",
+  "amount": 13.83,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-10",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 405.25,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-10",
+  "service": "EC2 - Other",
+  "amount": 59.96,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-10",
+  "service": "Amazon Relational Database Service",
+  "amount": 188.98,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-10",
+  "service": "Amazon Simple Storage Service",
+  "amount": 35.93,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-10",
+  "service": "AmazonCloudWatch",
+  "amount": 22.4,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-10",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 30.48,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-10",
+  "service": "AWS Lambda",
+  "amount": 6.07,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-10",
+  "service": "Amazon DynamoDB",
+  "amount": 14.08,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-11",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 400.29,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-11",
+  "service": "EC2 - Other",
+  "amount": 59.82,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-11",
+  "service": "Amazon Relational Database Service",
+  "amount": 187.58,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-11",
+  "service": "Amazon Simple Storage Service",
+  "amount": 37.32,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-11",
+  "service": "AmazonCloudWatch",
+  "amount": 21.67,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-11",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 30.08,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-11",
+  "service": "AWS Lambda",
+  "amount": 6.04,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-11",
+  "service": "Amazon DynamoDB",
+  "amount": 14.21,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-12",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 405.9,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-12",
+  "service": "EC2 - Other",
+  "amount": 58.91,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-12",
+  "service": "Amazon Relational Database Service",
+  "amount": 188.95,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-12",
+  "service": "Amazon Simple Storage Service",
+  "amount": 37.46,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-12",
+  "service": "AmazonCloudWatch",
+  "amount": 22.51,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-12",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 30.91,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-12",
+  "service": "AWS Lambda",
+  "amount": 6.08,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-12",
+  "service": "Amazon DynamoDB",
+  "amount": 14.14,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-13",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 405.25,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-13",
+  "service": "EC2 - Other",
+  "amount": 58.4,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-13",
+  "service": "Amazon Relational Database Service",
+  "amount": 181.01,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-13",
+  "service": "Amazon Simple Storage Service",
+  "amount": 36.36,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-13",
+  "service": "AmazonCloudWatch",
+  "amount": 22.33,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-13",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 30.23,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-13",
+  "service": "AWS Lambda",
+  "amount": 6.27,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-13",
+  "service": "Amazon DynamoDB",
+  "amount": 13.91,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-14",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 408.72,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-14",
+  "service": "EC2 - Other",
+  "amount": 213.7,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-14",
+  "service": "Amazon Relational Database Service",
+  "amount": 183.84,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-14",
+  "service": "Amazon Simple Storage Service",
+  "amount": 37.49,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-14",
+  "service": "AmazonCloudWatch",
+  "amount": 22.33,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-14",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 30.2,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-14",
+  "service": "AWS Lambda",
+  "amount": 6.08,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-14",
+  "service": "Amazon DynamoDB",
+  "amount": 14.47,
+  "estimated": false
+ },
+ {
+  "date": "2026-10-15",
+  "service": "Amazon Elastic Compute Cloud - Compute",
+  "amount": 101.82,
+  "estimated": true
+ },
+ {
+  "date": "2026-10-15",
+  "service": "EC2 - Other",
+  "amount": 121.3,
+  "estimated": true
+ },
+ {
+  "date": "2026-10-15",
+  "service": "Amazon Relational Database Service",
+  "amount": 45.96,
+  "estimated": true
+ },
+ {
+  "date": "2026-10-15",
+  "service": "Amazon Simple Storage Service",
+  "amount": 9.48,
+  "estimated": true
+ },
+ {
+  "date": "2026-10-15",
+  "service": "AmazonCloudWatch",
+  "amount": 5.4,
+  "estimated": true
+ },
+ {
+  "date": "2026-10-15",
+  "service": "Amazon Elastic Load Balancing",
+  "amount": 7.62,
+  "estimated": true
+ },
+ {
+  "date": "2026-10-15",
+  "service": "AWS Lambda",
+  "amount": 1.55,
+  "estimated": true
+ },
+ {
+  "date": "2026-10-15",
+  "service": "Amazon DynamoDB",
+  "amount": 3.52,
+  "estimated": true
+ }
+]

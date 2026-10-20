@@ -1,0 +1,10 @@
+{
+ "id": "route-investigate-5xx",
+ "kind": "router",
+ "suite": "deterministic",
+ "source": "데모 스크립트 1:30 장면",
+ "input": "checkout-api 5xx 늘었어, 원인 봐줘",
+ "expect": {
+  "route": "investigate"
+ }
+}

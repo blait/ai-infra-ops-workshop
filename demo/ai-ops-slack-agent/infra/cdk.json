@@ -1,0 +1,11 @@
+{
+  "app": "../.venv-infra/bin/python app.py",
+  "watch": {"include": ["**"], "exclude": ["cdk.out", "build"]},
+  "context": {
+    "aiops:region": "us-east-1",
+    "aiops:model": "us.anthropic.claude-sonnet-5-5",
+    "aiops:approvers": "REPLACE_WITH_SLACK_USER_IDS",
+    "aiops:slackDryRun": "true",
+    "aiops:demoTargetAz": "us-east-1a"
+  }
+}

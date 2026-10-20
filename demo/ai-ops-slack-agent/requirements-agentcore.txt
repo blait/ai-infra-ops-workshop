@@ -1,0 +1,6 @@
+# AgentCore Runtime image (Dockerfile.agentcore) = requirements.txt + ADOT for AgentCore Observability.
+# Versions checked on PyPI 2026-10-18. The bedrock-agentcore Python SDK is NOT used (the HTTP
+# contract is implemented with Starlette in aiops/agentcore_app.py); if you adopt it, pin >= 1.18.1
+# (CVE-2026-16796, research/03 §5).
+-r requirements.txt
+aws-opentelemetry-distro==0.21.0

@@ -1,0 +1,83 @@
+{
+ "now": "2026-10-15T05:30:00Z",
+ "region": "ap-northeast-2",
+ "services": {
+  "checkout-api": {
+   "description": "주문 결제 API (EC2 Auto Scaling 3대 + ALB, Spring Boot)",
+   "log_group": "/prod/checkout-api/app",
+   "alarm_prefix": "checkout-api-",
+   "security_groups": [
+    "sg-0c4f1e2d3b4a59687"
+   ],
+   "deploy": {
+    "tool": "CodeDeploy",
+    "application": "checkout-api",
+    "group": "prod-checkout"
+   },
+   "instances": [
+    {
+     "id": "i-0a1b2c3d4e5f60001",
+     "az": "ap-northeast-2a",
+     "state": "running"
+    },
+    {
+     "id": "i-0a1b2c3d4e5f60002",
+     "az": "ap-northeast-2b",
+     "state": "running"
+    },
+    {
+     "id": "i-0a1b2c3d4e5f60003",
+     "az": "ap-northeast-2c",
+     "state": "running"
+    }
+   ],
+   "metrics": {
+    "5xx_rate": {
+     "unit": "%",
+     "desc": "ALB 대상 5xx 비율"
+    },
+    "latency_p99": {
+     "unit": "ms",
+     "desc": "ALB TargetResponseTime p99"
+    },
+    "request_count": {
+     "unit": "count/5m",
+     "desc": "ALB RequestCount"
+    },
+    "cpu": {
+     "unit": "%",
+     "desc": "ASG 평균 CPUUtilization"
+    },
+    "healthy_hosts": {
+     "unit": "count",
+     "desc": "대상 그룹 HealthyHostCount"
+    }
+   }
+  },
+  "payments-db": {
+   "description": "결제 DB (Aurora PostgreSQL)",
+   "log_group": "/aws/rds/cluster/payments-db/postgresql",
+   "alarm_prefix": "payments-db-",
+   "security_groups": [],
+   "instances": [],
+   "metrics": {
+    "db_connections": {
+     "unit": "count",
+     "desc": "DatabaseConnections"
+    },
+    "cpu": {
+     "unit": "%",
+     "desc": "CPUUtilization"
+    }
+   }
+  },
+  "analytics-export": {
+   "description": "야간 데이터 내보내기 배치 (analytics VPC)",
+   "log_group": "/prod/analytics-export",
+   "alarm_prefix": "analytics-",
+   "security_groups": [],
+   "instances": [],
+   "metrics": {}
+  }
+ }
+}

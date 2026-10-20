@@ -1,0 +1,9 @@
+# Exact pins verified on 2026-10-15 (macOS arm64, Python 3.12). Used by the Dockerfile.
+claude-agent-sdk==0.2.167
+slack-bolt==1.30.0
+slack-sdk==3.45.0
+aiohttp==3.14.5
+boto3==1.43.114
+python-dotenv==1.2.4
+starlette==1.8.0
+uvicorn==0.54.0

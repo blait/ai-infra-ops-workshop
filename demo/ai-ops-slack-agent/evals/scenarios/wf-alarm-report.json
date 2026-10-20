@@ -1,0 +1,18 @@
+{
+ "id": "wf-alarm-report",
+ "kind": "pipeline",
+ "suite": "deterministic",
+ "source": "고정 워크플로",
+ "turns": [
+  "지금 알람 현황 알려줘"
+ ],
+ "expect": {
+  "route": "alarm_report",
+  "no_model_calls": true,
+  "text_contains_all": [
+   "checkout-api-5xx-rate-high",
+   "checkout-api-p99-latency-high",
+   "analytics-nat-bytes-anomaly"
+  ]
+ }
+}

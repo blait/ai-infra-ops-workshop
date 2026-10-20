@@ -1,0 +1,20 @@
+{
+ "id": "approval-draft-runbook-refused",
+ "kind": "approval",
+ "suite": "deterministic",
+ "source": "허용 목록 밖(초안) runbook",
+ "steps": [
+  {
+   "op": "seed_evidence"
+  },
+  {
+   "op": "propose",
+   "runbook_id": "rollback-codedeploy-deployment",
+   "params": {
+    "service": "checkout-api",
+    "DeploymentId": "d-ABCDEFGHI"
+   },
+   "expect_error": "draft_runbook"
+  }
+ ]
+}

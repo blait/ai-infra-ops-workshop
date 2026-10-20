@@ -1,0 +1,10 @@
+{
+ "id": "route-change-restart",
+ "kind": "router",
+ "suite": "deterministic",
+ "source": "데모 스크립트 5:00 장면",
+ "input": "재시작해줘",
+ "expect": {
+  "route": "change_request"
+ }
+}

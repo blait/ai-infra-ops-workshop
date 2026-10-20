@@ -1,0 +1,35 @@
+# Slack 앱 매니페스트 (Socket Mode: 공개 엔드포인트 불필요)
+# https://api.slack.com/apps → Create New App → From a manifest → 이 파일 붙여넣기
+# 설치 후 필요한 토큰
+#   SLACK_BOT_TOKEN: OAuth & Permissions → Bot User OAuth Token (xoxb-)
+#   SLACK_APP_TOKEN: Basic Information → App-Level Tokens → Generate (scope: connections:write) (xapp-)
+display_information:
+  name: ops-agent
+  description: 사내 운영 에이전트 (읽기 전용 조사 + runbook 제안, 변경은 승인 버튼으로만)
+  background_color: "#232f3e"
+features:
+  app_home:
+    home_tab_enabled: false
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: ops-agent
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read   # 채널에서 @ops-agent 멘션 받기 (app_mention 이벤트)
+      - chat:write          # 스레드에 답변·승인 카드 게시, chat.update / chat.postEphemeral
+      - im:history          # DM 메시지 받기 (message.im 이벤트)
+      - im:read             # DM 채널 정보
+      - im:write            # DM 열기
+settings:
+  event_subscriptions:
+    bot_events:
+      - app_mention
+      - message.im
+  interactivity:
+    is_enabled: true        # 승인/거절 버튼(block_actions). Socket Mode라 request_url 불필요
+  org_deploy_enabled: false
+  socket_mode_enabled: true
+  token_rotation_enabled: false

@@ -1,0 +1,10 @@
+{
+ "id": "route-cost-yesterday",
+ "kind": "router",
+ "suite": "deterministic",
+ "source": "데모 스크립트 3:30 장면",
+ "input": "어제 대비 비용이 튄 서비스는?",
+ "expect": {
+  "route": "cost_report"
+ }
+}

@@ -1,0 +1,73 @@
+# AIOPS_MODE=aws 에서 쓰는 서비스 정의. config/services.toml 로 복사해 실제 리소스로 채우세요.
+# (services.toml 은 계정 고유 값이 들어가므로 저장소에 올리지 않는 것을 권장합니다.)
+#
+# - log_group:      Logs Insights로 조회할 로그 그룹
+# - alarm_prefix:   이 서비스 알람 이름의 접두사 (검증 단계의 "<service>-5xx-rate-high" 알람 탐색에도 사용)
+# - instance_tag:   runbook 대상 인스턴스 인벤토리(ec2:DescribeInstances 태그 필터). 이 목록 밖 ID는 제안 단계에서 거부
+# - metrics.<key>:  GetMetricData 정의. expression이 있으면 queries(m1, m2…)를 조합한 metric math 결과를 씁니다.
+
+[services.checkout-api]
+description = "주문 결제 API (EC2 ASG + ALB)"
+log_group = "/prod/checkout-api/app"
+alarm_prefix = "checkout-api-"
+security_groups = ["sg-REPLACE_ME"]
+instance_tag = { key = "Service", value = "checkout-api" }
+
+[services.checkout-api.metrics.5xx_rate]
+unit = "%"
+desc = "ALB 대상 5xx 비율"
+period = 300
+expression = "IF(m2 > 0, 100 * m1 / m2, 0)"
+[[services.checkout-api.metrics.5xx_rate.queries]]
+id = "m1"
+namespace = "AWS/ApplicationELB"
+name = "HTTPCode_Target_5XX_Count"
+stat = "Sum"
+dimensions = { LoadBalancer = "app/REPLACE_ME_ALB_NAME/REPLACE_ME_ALB_ID" }
+[[services.checkout-api.metrics.5xx_rate.queries]]
+id = "m2"
+namespace = "AWS/ApplicationELB"
+name = "RequestCount"
+stat = "Sum"
+dimensions = { LoadBalancer = "app/REPLACE_ME_ALB_NAME/REPLACE_ME_ALB_ID" }
+
+[services.checkout-api.metrics.latency_p99]
+unit = "ms"
+desc = "ALB TargetResponseTime p99"
+expression = "1000 * m1"
+[[services.checkout-api.metrics.latency_p99.queries]]
+id = "m1"
+namespace = "AWS/ApplicationELB"
+name = "TargetResponseTime"
+stat = "p99"
+dimensions = { LoadBalancer = "app/REPLACE_ME_ALB_NAME/REPLACE_ME_ALB_ID" }
+
+[services.checkout-api.metrics.request_count]
+unit = "count/5m"
+desc = "ALB RequestCount"
+[[services.checkout-api.metrics.request_count.queries]]
+id = "m1"
+namespace = "AWS/ApplicationELB"
+name = "RequestCount"
+stat = "Sum"
+dimensions = { LoadBalancer = "app/REPLACE_ME_ALB_NAME/REPLACE_ME_ALB_ID" }
+
+[services.checkout-api.metrics.cpu]
+unit = "%"
+desc = "ASG 평균 CPUUtilization"
+[[services.checkout-api.metrics.cpu.queries]]
+id = "m1"
+namespace = "AWS/EC2"
+name = "CPUUtilization"
+stat = "Average"
+dimensions = { AutoScalingGroupName = "REPLACE_ME" }
+
+[services.checkout-api.metrics.healthy_hosts]
+unit = "count"
+desc = "대상 그룹 HealthyHostCount"
+[[services.checkout-api.metrics.healthy_hosts.queries]]
+id = "m1"
+namespace = "AWS/ApplicationELB"
+name = "HealthyHostCount"
+stat = "Minimum"
+dimensions = { TargetGroup = "targetgroup/REPLACE_ME_TG_NAME/REPLACE_ME_TG_ID", LoadBalancer = "app/REPLACE_ME_ALB_NAME/REPLACE_ME_ALB_ID" }

@@ -1,0 +1,43 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "StartOnlyAllowlistedAutomationDocuments",
+      "Effect": "Allow",
+      "Action": "ssm:StartAutomationExecution",
+      "Resource": [
+        "arn:aws:ssm:REGION::document/AWS-RestartEC2Instance",
+        "arn:aws:ssm:REGION:ACCOUNT_ID:automation-execution/*"
+      ]
+    },
+    {
+      "Sid": "TagExecutionsWithApprovalId",
+      "Effect": "Allow",
+      "Action": "ssm:AddTagsToResource",
+      "Resource": "arn:aws:ssm:REGION:ACCOUNT_ID:automation-execution/*"
+    },
+    {
+      "Sid": "ReadExecutionStatusForVerify",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetAutomationExecution",
+        "ssm:DescribeAutomationExecutions",
+        "ssm:DescribeAutomationStepExecutions"
+      ],
+      "Resource": "arn:aws:ssm:REGION:ACCOUNT_ID:automation-execution/*"
+    },
+    {
+      "Sid": "PassOnlyTheAutomationRole",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::ACCOUNT_ID:role/aiops-automation-restart",
+      "Condition": {"StringEquals": {"iam:PassedToService": "ssm.amazonaws.com"}}
+    },
+    {
+      "Sid": "VerifyStepReadsMetricsAndAlarms",
+      "Effect": "Allow",
+      "Action": ["cloudwatch:GetMetricData", "cloudwatch:DescribeAlarms", "ec2:DescribeInstances"],
+      "Resource": "*"
+    }
+  ]
+}

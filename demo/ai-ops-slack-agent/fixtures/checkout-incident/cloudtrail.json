@@ -1,0 +1,139 @@
+[
+ {
+  "EventTime": "2026-10-13T23:10:04Z",
+  "EventName": "DeleteVpcEndpoints",
+  "EventSource": "ec2.amazonaws.com",
+  "Username": "assumed-role/terraform-analytics/tf-apply-3391",
+  "ReadOnly": "false",
+  "Resources": [
+   {
+    "ResourceType": "AWS::EC2::VPCEndpoint",
+    "ResourceName": "vpce-0f1e2d3c4b5a69788"
+   }
+  ],
+  "RequestParameters": {
+   "vpcEndpointIds": [
+    "vpce-0f1e2d3c4b5a69788"
+   ],
+   "note": "S3 gateway endpoint in analytics VPC"
+  }
+ },
+ {
+  "EventTime": "2026-10-15T03:58:12Z",
+  "EventName": "PutBucketTagging",
+  "EventSource": "s3.amazonaws.com",
+  "Username": "assumed-role/data-eng-ci/run-5521",
+  "ReadOnly": "false",
+  "Resources": [
+   {
+    "ResourceType": "AWS::S3::Bucket",
+    "ResourceName": "analytics-raw-logs"
+   }
+  ],
+  "RequestParameters": {
+   "bucketName": "analytics-raw-logs"
+  }
+ },
+ {
+  "EventTime": "2026-10-15T04:12:40Z",
+  "EventName": "DescribeInstances",
+  "EventSource": "ec2.amazonaws.com",
+  "Username": "assumed-role/github-actions-deploy/gha-run-8812",
+  "ReadOnly": "true",
+  "Resources": [],
+  "RequestParameters": {}
+ },
+ {
+  "EventTime": "2026-10-15T04:42:10Z",
+  "EventName": "CreateDeployment",
+  "EventSource": "codedeploy.amazonaws.com",
+  "Username": "assumed-role/github-actions-deploy/gha-run-8812",
+  "ReadOnly": "false",
+  "Resources": [
+   {
+    "ResourceType": "AWS::CodeDeploy::Application",
+    "ResourceName": "checkout-api"
+   },
+   {
+    "ResourceType": "AWS::CodeDeploy::DeploymentGroup",
+    "ResourceName": "prod-checkout"
+   }
+  ],
+  "RequestParameters": {
+   "applicationName": "checkout-api",
+   "deploymentGroupName": "prod-checkout",
+   "revision": {
+    "s3Location": {
+     "key": "checkout-api/checkout-api-v2.14.0.zip"
+    }
+   },
+   "deploymentConfigName": "CodeDeployDefault.OneAtATime",
+   "description": "release v2.14.0 (payment client refactor)"
+  }
+ },
+ {
+  "EventTime": "2026-10-15T04:47:33Z",
+  "EventName": "AuthorizeSecurityGroupIngress",
+  "EventSource": "ec2.amazonaws.com",
+  "Username": "jlee",
+  "ReadOnly": "false",
+  "Resources": [
+   {
+    "ResourceType": "AWS::EC2::SecurityGroup",
+    "ResourceName": "sg-0c4f1e2d3b4a59687"
+   }
+  ],
+  "RequestParameters": {
+   "groupId": "sg-0c4f1e2d3b4a59687",
+   "ipPermissions": [
+    {
+     "ipProtocol": "tcp",
+     "fromPort": 9100,
+     "toPort": 9100,
+     "groups": [
+      {
+       "groupId": "sg-0d9e8f7a6b5c41302"
+      }
+     ]
+    }
+   ],
+   "description": "node exporter scrape from monitoring"
+  }
+ },
+ {
+  "EventTime": "2026-10-15T04:47:34Z",
+  "EventName": "DescribeSecurityGroups",
+  "EventSource": "ec2.amazonaws.com",
+  "Username": "jlee",
+  "ReadOnly": "true",
+  "Resources": [],
+  "RequestParameters": {}
+ },
+ {
+  "EventTime": "2026-10-15T05:06:02Z",
+  "EventName": "GetParameter",
+  "EventSource": "ssm.amazonaws.com",
+  "Username": "assumed-role/checkout-api-instance/i-0a1b2c3d4e5f60001",
+  "ReadOnly": "true",
+  "Resources": [],
+  "RequestParameters": {
+   "name": "/prod/checkout/db-url"
+  }
+ },
+ {
+  "EventTime": "2026-10-15T05:12:44Z",
+  "EventName": "PutDashboard",
+  "EventSource": "monitoring.amazonaws.com",
+  "Username": "jlee",
+  "ReadOnly": "false",
+  "Resources": [
+   {
+    "ResourceType": "AWS::CloudWatch::Dashboard",
+    "ResourceName": "checkout-incident"
+   }
+  ],
+  "RequestParameters": {
+   "dashboardName": "checkout-incident"
+  }
+ }
+]

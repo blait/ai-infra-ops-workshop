@@ -1,0 +1,27 @@
+# Amazon Bedrock AgentCore Runtime image: the agent "brain" only (router, workflows, investigator +
+# 3 scouts, evaluator, gates). No Slack token, no approval store, no executor credentials in here.
+# Contract: linux/arm64, 0.0.0.0:8080, GET /ping, POST /invocations.
+#   docker build --platform linux/arm64 -f Dockerfile.agentcore -t aiops-agentcore .
+# infra/ builds and pushes this file as a CDK asset (ECR) and creates the Runtime from it.
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 \
+    HOST=0.0.0.0 PORT=8080 \
+    AIOPS_DATA_DIR=/tmp/aiops HOME=/tmp/aiops-home \
+    OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=urllib3,requests
+
+WORKDIR /app
+COPY requirements.txt requirements-agentcore.txt ./
+RUN pip install -r requirements-agentcore.txt
+
+COPY aiops ./aiops
+COPY runbooks ./runbooks
+COPY fixtures ./fixtures
+COPY config ./config
+
+RUN useradd --create-home --uid 10001 aiops
+USER aiops
+EXPOSE 8080
+
+# ADOT auto-instrumentation -> AgentCore Observability (spans/logs in CloudWatch)
+CMD ["opentelemetry-instrument", "python", "-m", "aiops.agentcore_app"]

@@ -1,0 +1,10 @@
+{
+ "id": "route-question-is-not-change",
+ "kind": "router",
+ "suite": "deterministic",
+ "source": "개발 중 실제 오분류(질문이 변경 요청으로 분류됨)",
+ "input": "왜 재시작이 필요한지 설명해줘",
+ "expect": {
+  "route": "investigate"
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "id": "agent-cost-why-nat",
+ "kind": "agent",
+ "suite": "live",
+ "source": "FinOps: NAT 비용 급증의 원인 변경 찾기(36시간 전 변경)",
+ "turns": [
+  "EC2 - Other 비용이 어제 왜 늘었는지 원인 분석해줘"
+ ],
+ "expect": {
+  "route": "investigate",
+  "hypothesis_any": [
+   "엔드포인트",
+   "endpoint",
+   "vpce",
+   "DeleteVpcEndpoints",
+   "NAT"
+  ],
+  "evidence_valid": true,
+  "proposals_exact": 0
+ }
+}

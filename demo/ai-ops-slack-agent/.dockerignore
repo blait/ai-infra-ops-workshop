@@ -1,0 +1,16 @@
+.venv
+var
+evals/results
+.env
+.env.*
+!.env.example
+**/__pycache__
+.pytest_cache
+infra
+tests
+evals
+slack
+iam
+/README.md
+.git
+.venv-infra
