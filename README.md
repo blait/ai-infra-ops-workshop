@@ -7,6 +7,7 @@
 - `index.html`: 본문, 화면 코드, 스크린샷을 포함한 단일 HTML
 - `.nojekyll`: 생성한 파일을 그대로 제공하는 GitHub Pages 설정
 - `README.md`: 게시 안내
+- `demo/ai-ops-slack-agent/`: 모듈 3 데모 코드(Streamlit + AgentCore). 실행 방법은 웹 가이드 40-04 페이지
 
 GitHub Pages는 `main` 브랜치의 루트(`/`)를 게시합니다.
 `main`에 변경을 푸시하면 사이트가 갱신됩니다.
